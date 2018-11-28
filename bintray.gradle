@@ -1,0 +1,35 @@
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+    tasks.withType(Javadoc) {
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+}
+
+publish {
+    userOrg = rootProject.userOrg      //bintray注册的用户名
+    groupId = rootProject.groupId      //compile引用时的第1部分groupId
+    artifactId = 'pluginLibs'     //compile引用时的第2部分项目名
+    publishVersion = rootProject.versionName    //compile引用时的第3部分版本号
+    desc = rootProject.desc
+    website = rootProject.website
+}
+
+
+
+
+
